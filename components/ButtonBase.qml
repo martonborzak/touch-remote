@@ -1,6 +1,7 @@
 /******************************************************************************
  *
  * Copyright (C) 2018-2019 Marton Borzak <hello@martonborzak.com>
+ * Copyright (C) 2021 Michael Loercher <michaelloercher@web.de>
  *
  * This file is part of the YIO-Remote software project.
  *
@@ -28,6 +29,7 @@ import Style 1.0
 import Haptic 1.0
 import StandbyControl 1.0
 import ButtonHandler 1.0
+import IntegrationConnectionStates 1.0
 
 import "qrc:/basic_ui" as BasicUI
 
@@ -45,6 +47,10 @@ Rectangle {
             if (obj.connected) {
                 buttonContainer.opacity = 1
                 buttonContainer.enabled = true
+            } else if (obj.state === IntegrationConnectionStates.DISCONNECTED) {
+                buttonContainer.opacity = 0.3
+                buttonContainer.enabled = false
+                buttonContainer.close()
             }
             else {
                 buttonContainer.opacity = 0.3
